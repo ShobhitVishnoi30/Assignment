@@ -21,8 +21,9 @@ describe("CappedSet", () => {
 
   describe("insert", () => {
     it("should insert a new element and return the lowest address and value", async () => {
-      const insertTx = await cappedSet.insert(addr1.address, 100);
-      await insertTx.wait();
+      await cappedSet.insert(addr1.address, 100);
+      await cappedSet.insert(addr2.address, 200);
+      await cappedSet.insert(addr3.address, 300);
 
       const [lowestAddress, lowestValue] = await cappedSet.getMin();
       expect(lowestAddress).to.equal(addr1.address);
@@ -41,11 +42,16 @@ describe("CappedSet", () => {
   describe("update", () => {
     it("should update an existing element and return the lowest address and value", async () => {
       await cappedSet.insert(addr1.address, 100);
+      await cappedSet.insert(addr2.address, 200);
+      await cappedSet.insert(addr3.address, 300);
 
-      const updateTx = await cappedSet.update(addr1.address, 50);
-      await updateTx.wait();
+      let [lowestAddress, lowestValue] = await cappedSet.getMin();
+      expect(lowestAddress).to.equal(addr1.address);
+      expect(lowestValue).to.equal(100);
 
-      const [lowestAddress, lowestValue] = await cappedSet.getMin();
+      await cappedSet.update(addr1.address, 50);
+
+      [lowestAddress, lowestValue] = await cappedSet.getMin();
       expect(lowestAddress).to.equal(addr1.address);
       expect(lowestValue).to.equal(50);
     });
@@ -63,10 +69,13 @@ describe("CappedSet", () => {
       await cappedSet.insert(addr2.address, 200);
       await cappedSet.insert(addr3.address, 300);
 
-      const removeTx = await cappedSet.remove(addr1.address);
-      await removeTx.wait();
+      let [lowestAddress, lowestValue] = await cappedSet.getMin();
+      expect(lowestAddress).to.equal(addr1.address);
+      expect(lowestValue).to.equal(100);
 
-      const [lowestAddress, lowestValue] = await cappedSet.getMin();
+      await cappedSet.remove(addr1.address);
+
+      [lowestAddress, lowestValue] = await cappedSet.getMin();
       expect(lowestAddress).to.equal(addr2.address);
       expect(lowestValue).to.equal(200);
     });
@@ -122,8 +131,7 @@ describe("CappedSet", () => {
       await cappedSet.insert(addr3.address, 300);
 
       // Insert a new element, which should remove the minimum value (100)
-      const insertTx = await cappedSet.insert(owner.address, 50);
-      await insertTx.wait();
+      await cappedSet.insert(owner.address, 50);
 
       const [lowestAddress, lowestValue] = await cappedSet.getMin();
       expect(lowestAddress).to.equal(owner.address);
@@ -137,8 +145,7 @@ describe("CappedSet", () => {
       await cappedSet.insert(addr3.address, 300);
 
       // Update an existing element with a new value (150)
-      const updateTx = await cappedSet.update(addr2.address, 150);
-      await updateTx.wait();
+      await cappedSet.update(addr2.address, 150);
 
       const [lowestAddress, lowestValue] = await cappedSet.getMin();
       expect(lowestAddress).to.equal(addr1.address);
@@ -148,14 +155,17 @@ describe("CappedSet", () => {
     it("should handle maximum capacity and maintain the minimum value when removing existing elements", async () => {
       // Insert elements up to the maximum capacity
       await cappedSet.insert(addr1.address, 100);
-      await cappedSet.insert(addr2.address, 200);
+      await cappedSet.insert(addr2.address, 50);
       await cappedSet.insert(addr3.address, 300);
 
-      // Remove an existing element (addr2)
-      const removeTx = await cappedSet.remove(addr2.address);
-      await removeTx.wait();
+      let [lowestAddress, lowestValue] = await cappedSet.getMin();
+      expect(lowestAddress).to.equal(addr2.address);
+      expect(lowestValue).to.equal(50);
 
-      const [lowestAddress, lowestValue] = await cappedSet.getMin();
+      // Remove an existing element (addr2)
+      await cappedSet.remove(addr2.address);
+
+      [lowestAddress, lowestValue] = await cappedSet.getMin();
       expect(lowestAddress).to.equal(addr1.address);
       expect(lowestValue).to.equal(100);
     });
@@ -167,11 +177,9 @@ describe("CappedSet", () => {
       await cappedSet.insert(addr3.address, 300);
 
       // Remove an existing element (addr2) and insert a new element (owner)
-      const removeTx = await cappedSet.remove(addr2.address);
-      await removeTx.wait();
+      await cappedSet.remove(addr2.address);
 
-      const insertTx = await cappedSet.insert(owner.address, 50);
-      await insertTx.wait();
+      await cappedSet.insert(owner.address, 50);
 
       const [lowestAddress, lowestValue] = await cappedSet.getMin();
       expect(lowestAddress).to.equal(owner.address);
