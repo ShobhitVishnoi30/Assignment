@@ -1,0 +1,9 @@
+node_modules
+build
+artifacts
+cache
+
+#foundry files
+lib
+out
+forge-cache
