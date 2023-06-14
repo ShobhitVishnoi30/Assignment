@@ -134,7 +134,7 @@ To run prettier :
 yarn prettier
 ```
 
-### Gorli verification
+### Goerli verification
 
 Set API key for goerli in the .env file.
 [https://etherscan.io/myapikey](https://etherscan.io/myapikey)
