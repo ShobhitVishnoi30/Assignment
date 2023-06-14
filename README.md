@@ -1,5 +1,7 @@
 # CappedSet
 
+Deployed Contract -> https://goerli.etherscan.io/address/0xad7bc33826df2adbd652cc58c6b3a700298fb9ab
+
 ## About
 
 CappedSet: Address-value set with capped capacity and auto-removal of lowest.
