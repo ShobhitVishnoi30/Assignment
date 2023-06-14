@@ -139,7 +139,7 @@ yarn prettier
 Set API key for goerli in the .env file.
 [https://etherscan.io/myapikey](https://etherscan.io/myapikey)
 
-    -- Georli Testnet
+    -- Goerli Testnet
     yarn run verify-contract <contract-address> <constructor-paramter>
 
 ## Testing on Remix
