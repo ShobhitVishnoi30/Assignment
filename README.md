@@ -1,33 +1,5 @@
 # CappedSet
 
-## Table of Contents
-
-- [CappedSet](#CappedSet)
-  - [Table of Contents](#table-of-contents)
-  - [About](#about)
-  - [Project Description](#project-description)
-  - [System Requirements](#system-requirements)
-  - [Architecture](#architecture)
-  - [Prerequisites](#prerequisites)
-  - [Technologies Used](#technologies-used)
-  - [Directory layout](#directory-layout)
-  - [How to Install and Run](#how-to-install-and-run)
-  - [Installation](#installation)
-    - [Clone the repository to your local machine using the command.](#clone-the-repository-to-your-local-machine-using-the-command)
-    - [Install the required packages using the command.](#install-the-required-packages-using-the-command)
-    - [Set up .env](#set-up-env)
-  - [Building the projects](#building-the-projects)
-    - [compile](#compile)
-    - [Clean](#clean)
-    - [Testing](#testing)
-    - [Coverage](#coverage)
-    - [Deployment](#deployment)
-    - [Coverage](#coverage-1)
-    - [Contract-size](#contract-size)
-    - [Prettier](#prettier)
-    - [Goerli verification](#polygonscan-verification)
-  - [Testing on Remix](#testing-on-remix)
-
 ## About
 
 CappedSet: Address-value set with capped capacity and auto-removal of lowest.
