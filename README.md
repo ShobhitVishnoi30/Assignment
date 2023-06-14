@@ -33,7 +33,7 @@ The CappedSet contract represents a set data structure where each element is a p
 
     ├── contracts/           # Solidity smart contracts
     ├── scripts/             # Scripts for deploy with smart contracts
-    ├── test/unit            # Automated unit tests for smart contracts
+    ├── test/                # Automated unit tests for smart contracts
     ├── hardhat.config.js    # Hardhat configuration file
     ├── README.md            # Project README file
     └── .gitignore           # Git ignore file
